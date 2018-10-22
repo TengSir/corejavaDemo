@@ -3,6 +3,7 @@
  */
 package com.oracle.corejava.project;
 
+import com.oracle.corejava.advance.t2.Animal;
 import com.oraclesdp.common.SystemIn;
 
 /**
