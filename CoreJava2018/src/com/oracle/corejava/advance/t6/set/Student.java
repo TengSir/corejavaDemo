@@ -1,7 +1,6 @@
-package com.oracle.corejava.advance.t6;
+package com.oracle.corejava.advance.t6.set;
 
-public class Student  implements Comparable{
-	
+public class Student implements Comparable<Student>{
 	private int stuid;
 	private String stuname;
 	private String stusex;
@@ -87,9 +86,14 @@ public class Student  implements Comparable{
 		this.stuage = stuage;
 	}
 	@Override
-	public int compareTo(Object o) {
-		Student s=(Student)o;
-		return s.getStuage()-this.stuage;
+	public int compareTo(Student o) {
+		if(this.stuage==o.getStuage())
+		{
+			return this.stuname.compareTo(o.getStuname());
+		}else {
+			return this.stuage-o.getStuage();
+		}
 	}
+
 
 }

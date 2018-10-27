@@ -1,6 +1,6 @@
 package com.oracle.corejava.advance.t4;
 
-public class La  extends RanLiao{
+public class La  implements RanLiao{
 
 }
 

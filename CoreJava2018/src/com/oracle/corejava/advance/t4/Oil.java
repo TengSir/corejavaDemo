@@ -1,6 +1,6 @@
 package com.oracle.corejava.advance.t4;
 
-public abstract class Oil extends  RanLiao {
+public abstract class Oil implements  RanLiao {
 	
 	private  int  jiegou;
 	private int kaluli;

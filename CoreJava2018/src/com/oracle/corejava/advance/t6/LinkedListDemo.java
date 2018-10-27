@@ -9,7 +9,5 @@ public class LinkedListDemo {
 	public static void main(String[] args) {
 		
 		Queue sss=new LinkedList();
-		
 	}
-
 }

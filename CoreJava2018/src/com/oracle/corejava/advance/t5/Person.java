@@ -10,11 +10,8 @@ public class Person {
 	//some other fields
 	
 	class Heart{
-		private String xxx;
-		private String xxx;
-		private String xxx;
-		private String xxx;
-		private String xxx;
+		private String xinlv;
+		private String dongmai;
 	}
 
 }
