@@ -40,19 +40,23 @@ public class ExceptionDemo {
 	public static void main(String[] args)throws Exception{
 		
 		try {
+			int  a=23;
 			System.out.println("A");
 			
 			System.out.println(10/0);
 			System.out.println("A");
-			int[]  aa= {223};
-			System.out.println(aa[1]);
+//			int[]  aa= {223};
+//			System.out.println(aa[1]);
+			System.out.println(a);
+			String  str=null;
+			System.out.println(str.length());
 			System.out.println("A");
-			System.out.println("A");
-		} catch (ArithmeticException|ArrayIndexOutOfBoundsException e) {
+		} catch(ClassCastException  e1) {
+			System.out.println("aaa");
+		}catch (ArithmeticException|ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();//打印堆栈异常
 			System.out.println(e.getMessage());
 			System.out.println("xxxx");
-		}catch(RuntimeException  e1) {
-			System.out.println("aaa");
 		}catch (Exception e) {
 		}finally {
 			System.out.println("必须会执行结构块，这里书写一些无论是发生异常还是没发生异常都要运行的代码");
