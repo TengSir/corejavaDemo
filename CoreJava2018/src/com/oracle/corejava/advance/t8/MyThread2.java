@@ -6,16 +6,16 @@ package com.oracle.corejava.advance.t8;
  *
  */
 public class MyThread2  extends Thread{
-
+	Counter  c;
+	 public MyThread2(Counter c) {
+		 this.c=c;
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public void run() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		for(int n=0;n<3;n++) {
-			System.out.println("####");
+		
+		for(int n=0;n<5000;n++) {
+			c.removeOne();
 		}
 	}
 	
