@@ -11,6 +11,7 @@ public class Test {
 		Producer  p=new Producer(c);
 		
 		con.start();
+		con.start();
 		p.start();
 		
 		try {
