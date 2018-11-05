@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
@@ -29,7 +31,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
 public class QuickSearcher extends JFrame {
 
 //	private Map<String, String> files = new HashMap<String, String>();
@@ -70,13 +71,16 @@ public class QuickSearcher extends JFrame {
 //				}
 			}
 		}, 0, 1000);
-		rootPath = "/Users";
 		long startTime=new Date().getTime();
+		rootPath="/Users";
 		listChlidsOfDir(rootPath);
+//		Iterable<Path>  p=FileSystems.getDefault().getRootDirectories();
+//		for(Path pp:p) {
+//			rootPath = pp.toString();
+//			listChlidsOfDir(rootPath);
+//		}
 		System.out.println(files.size());
-
 		t.cancel();
-		
 		long endTime=new Date().getTime();
 		statusLabel.setText("After "+(endTime-startTime)/1000+" seconds, "+files.size() + " files was  indexed!");
 	}
