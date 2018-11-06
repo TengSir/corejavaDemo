@@ -72,7 +72,7 @@ public class QuickSearcher extends JFrame {
 			}
 		}, 0, 1000);
 		long startTime=new Date().getTime();
-		rootPath="/Users";
+		rootPath="c:/";
 		listChlidsOfDir(rootPath);
 //		Iterable<Path>  p=FileSystems.getDefault().getRootDirectories();
 //		for(Path pp:p) {
