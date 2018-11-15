@@ -1,5 +1,14 @@
 package com.oracle.corejava.advance.swing;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -8,7 +17,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-
 //设计swing最好采用封装的方式来设计界面 is-a
 
 //1.定以一个类采用继承的方式继承一个顶级容器（设计出程序的窗口）
@@ -22,14 +30,40 @@ public class LoginFrame extends JFrame{
 	private JCheckBox  rememberPassword;
 	private JRadioButton  autoLogin,notAutoLogin;
 	private JToggleButton  statusButton;
+	private MyMouseLisener  allMouseListener;
 	public LoginFrame() {
 		//一般来说窗口的显示参数都在构造器里设置
 		this.setSize(400, 300);
 		this.setLocationRelativeTo(null);//设置窗口的相对位置剧中
 		this.setVisible(true);
-		this.setLayout(null);//设置空布局（绝对定位布局）
+		//所有的容器设置布局的方法都是setlayout()
+		//JFrame默认是borderlayout，设置为borderlayout的容器窗口只分了五块区域，
+		this.setLayout(null);//设置空布局（绝对定位布局）AbsoluteLayout绝对定位布局
 		this.setTitle("默默-登陆");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//设计jframe关闭时退出程序而不是隐藏窗口
+//		
+		allMouseListener=new MyMouseLisener();
+//		JPanel  topPanel=new JPanel();
+//		JButton  leftButton=new JButton("<");
+//		topPanel.add(leftButton);
+//		
+//		topPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+//		this.add(topPanel, BorderLayout.NORTH);
+//		
+//		JPanel  leftPanel=new JPanel();
+//		leftPanel.setBackground(Color.blue);
+//		this.add(leftPanel, BorderLayout.WEST);
+//		
+//		JPanel  bottomPanel=new JPanel();
+//		
+//		bottomPanel.setLayout(new BoxLayout(bottomPanel,BoxLayout.X_AXIS));
+//		//JPanel 的默认布局就是flowLayout
+//		for(int n=0;n<10;n++) {
+//		JButton  dir1=new JButton("films"+n);
+//		bottomPanel.add(dir1);
+//		}
+//		bottomPanel.setBorder(BorderFactory.createLineBorder(Color.pink));
+//		this.add(bottomPanel, BorderLayout.CENTER);
 		
 		//在窗口初始化完毕之后调用初始化组件定方法让组件渲染出来（显示出来）
 		initComponent();
@@ -41,10 +75,14 @@ public class LoginFrame extends JFrame{
 	 */
 	public void initComponent() {
 		usernameLabel=new JLabel("默默账号：");
+		usernameLabel.setForeground(Color.green);
+		usernameLabel.setBackground(Color.GRAY);
+		usernameLabel.setFont(new Font("宋体", Font.ITALIC, 12));
 		usernameLabel.setBounds(100, 50, 80, 20);
 		this.add(usernameLabel);//将这个组件添加到主窗口上
 		
 		username=new JTextField();
+		username.addMouseListener(allMouseListener);
 		username.setBounds(200, 50, 160, 20);
 		this.add(username);
 		
@@ -57,10 +95,20 @@ public class LoginFrame extends JFrame{
 		this.add(password);
 		
 		loginButton =new JButton("登陆");
+		
+		//注册监听
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmojiWindow  w=new EmojiWindow();
+				LoginFrame.this.dispose();//让窗口消失同时释放资源
+			}
+		});
+		loginButton.addMouseListener(allMouseListener);
 		loginButton.setBounds(130, 150, 60, 20);
 		this.add(loginButton);
 		
 		registerButton =new JButton("注册");
+		registerButton.addMouseListener(allMouseListener );
 		registerButton.setBounds(210, 150, 60, 20);
 		this.add(registerButton);
 		
@@ -86,5 +134,36 @@ public class LoginFrame extends JFrame{
 		
 		LoginFrame  f=new LoginFrame();
 	}
+	//专门定义一个类，这个类实现监听接口，里面书写监听事件发生之后对应的代码
+	class  ButtonListener implements  ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("您点击了登陆按钮");
+		}
+	}
+	
+	class MyMouseLisener extends MouseAdapter{
+		public void mouseEntered(MouseEvent e) {
+			if(e.getSource()==loginButton) {
+				loginButton.setForeground(Color.red);
+			}else if(e.getSource()==registerButton) {
+				registerButton.setForeground(Color.green);
+			}else if(e.getSource()==username) {
+				username.setBorder(BorderFactory.createLineBorder(Color.RED));
+			}
+		}
+		public void mouseExited(MouseEvent e) {
+			if(e.getSource()==loginButton) {
+				loginButton.setForeground(Color.black);
+			}else if(e.getSource()==registerButton) {
+				registerButton.setForeground(Color.black);
+			}else if(e.getSource()==username) {
+				username.setBorder(BorderFactory.createLineBorder(new Color(178,178,178)));
+			}
+		}
+	}
+	
 
 }
+
+
